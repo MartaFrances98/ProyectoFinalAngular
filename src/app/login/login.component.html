@@ -1,0 +1,38 @@
+<section>
+  <br>
+  <div class="container">
+    <h1 class=" text-center">LOGIN</h1>
+    <br>
+    <form (ngSubmit)="submit()" class="text-center border border-dark rounded-5 p-5">
+      
+      <!-- Nombre -->
+      <input type="text" [(ngModel)]="nombre" class="form-control mb-4" placeholder="Name">
+
+      <!-- Email -->
+      <input type="email" [(ngModel)]="email" class="form-control mb-4" placeholder="E-mail">
+
+      <!-- Contraseña -->
+      <input type="password" [(ngModel)]="password" class="form-control mb-4" placeholder="Password">
+
+      <!-- Recordar Usuario y Olvidar Contraseña -->
+      <div class="d-flex justify-content-around">
+        <div>
+          <a href="">Forgot password?</a>
+        </div>
+      </div>
+
+      <!-- Botón de Inicio de Sesión -->
+      <button type="submit" class="btn btn-info btn-block my-4">Sign in</button>
+
+      <!-- Registro y Login Social -->
+      <p>Not a member? 
+      <a href="" routerLink="/signup">Register</a></p>
+      <p>or sign in with:</p>
+      <a type="button" class="light-blue-text mx-2"><i class="bi bi-facebook"></i></a>
+      <a type="button" class="light-blue-text mx-2"><i class="bi bi-twitter"></i></a>
+      <a type="button" class="light-blue-text mx-2"><i class="bi bi-linkedin"></i></a>
+      <a type="button" class="light-blue-text mx-2"><i class="bi bi-github"></i></a>
+
+    </form>
+  </div>
+</section>

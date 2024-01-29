@@ -1,0 +1,28 @@
+.sidebar {
+    position: fixed; /* Posición fija */
+    top: 75px; /* Asumiendo que tu barra de navegación tenga 56px de alto, ajusta según sea necesario */
+    right: 0; /* Alineado a la izquierda */
+    width: 250px; /* Ancho del sidebar */
+    height: calc(100% - 75px); /* Altura completa menos la altura de tu barra de navegación */
+    background-color: #f8f9fa; /* Color de fondo */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
+    z-index: 1000; /* Asegura que se muestre sobre otros elementos */
+    overflow-y: auto; /* Habilita el desplazamiento si el contenido es muy largo */
+    transition: transform 0.3s ease-in-out; /* Transición suave para la animación */
+}
+
+/* Clase para controlar la visibilidad del sidebar */
+.sidebar-oculto {
+    transform: translateX(-100%); /* Oculta el sidebar desplazándolo a la izquierda */
+}
+
+/* Clase para mostrar el sidebar */
+.sidebar-visible {
+    transform: translateX(0); /* Muestra el sidebar */
+}
+
+/* Asegúrate de que tu botón no esté detrás del sidebar */
+button.toggle-button {
+    position: relative; /* Relativo o absoluto según necesites */
+    z-index: 1100; /* Mayor que el del sidebar para que se muestre por encima */
+}

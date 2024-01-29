@@ -1,0 +1,200 @@
+<section>
+    <br>
+        <h1 class="text-center">SIGN UP</h1>
+        <div class="container text-center mt-5">
+            <form [formGroup]="formularioContacto" (ngSubmit)="submit($event)" class="text-center border border-dark rounded-5 p-5"
+                style="max-width: auto; margin: auto;">
+                <div class="form-group">
+                    <label for="DNI">DNI</label>
+                    <input type="text" formControlName="DNI" id="DNI" class="form-control" required>
+                    @if(this.formularioContacto.get('DNI')?.touched &&
+                    this.formularioContacto.get('DNI')?.errors?.['required'])
+                    {
+                    <div class="alert alert-danger" role="alert">
+                        El DNI no puede quedar vacío
+                    </div>
+                    }
+                    @if(this.formularioContacto.get('DNI')?.touched &&
+                    this.formularioContacto.get('DNI')?.errors?.['formatoDNI']) {
+                    <div class="alert alert-danger" role="alert">
+                        El formato del DNI debe contener 8 numeros y una letra en mayúscula
+                    </div>
+                    }
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" formControlName="nombre" id="nombre" class="form-control" required>
+                            @if(this.formularioContacto.get('nombre')?.touched &&
+                            this.formularioContacto.get('nombre')?.errors?.['required']) {
+                            <div class="alert alert-danger" role="alert">
+                                El Nombre no puede quedar vacío
+                            </div>
+                            }
+                            @if(this.formularioContacto.get('nombre')?.errors?.['pattern']||this.formularioContacto.get('nombre')?.errors?.['maxlength'])
+                            {
+                            <div class="alert alert-danger" role="alert">
+                                Debe tener como máximo 20 caracteres y en mayúsculas
+                            </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="group">
+                            <label for="apellido">Apellido</label>
+                            <div class="input-group">
+                                <input type="text" style="text-transform: uppercase" formControlName="apellido"
+                                    id="apellido" class="form-control" required>
+                                <!-- <input type="text" style="text-transform: uppercase" formControlName="apellido" id="apellido"
+                            class="form-control" required> -->
+                            </div>
+                            @if(this.formularioContacto.get('apellido')?.touched &&
+                            this.formularioContacto.get('apellido')?.errors?.['required']) {
+                            <div class="alert alert-danger" role="alert">
+                                El apellido no puede quedar vacío
+                            </div>
+                            }
+                            @if(this.formularioContacto.get('apellido')?.touched &&
+                            this.formularioContacto.get('apellido')?.errors?.['maxlength']) {
+                            <div class="alert alert-danger" role="alert">
+                                Debe tener como máximo 50 caracteres
+                            </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="mail">Mail</label>
+                    <input type="text" formControlName="mail" id="mail" class="form-control">
+                    @if(this.formularioContacto.get('mail')?.touched &&
+                    this.formularioContacto.get('mail')?.errors?.['required']) {
+                    <div class="alert alert-danger" role="alert">
+                        El mail no puede quedar vacío
+                    </div>
+                    }
+                    @if(this.formularioContacto.get('mail')?.touched &&
+                    this.formularioContacto.get('mail')?.errors?.['email']) {
+                    <div class="alert alert-danger" role="alert">
+                        El mail no es válido
+                    </div>
+                    }
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" formControlName="password" id="password" class="form-control" required>
+                    <!-- Validaciones para Contraseña... -->
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Sexo: </label>
+                            <br>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" formControlName="sexo" id="masculino" value="masculino"
+                                    class="form-check-input">
+                                <label for="masculino" class="form-check-label">Masc</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" formControlName="sexo" id="femenino" value="femenino"
+                                    class="form-check-input">
+                                <label for="femenino" class="form-check-label">Feme</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" formControlName="sexo" id="s_n" value="s/n"
+                                    class="form-check-input">
+                                <label for="s_n" class="form-check-label">S/N</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="horario">Horario</label>
+                            <select formControlName="horario" id="horario" class="form-control">
+                                <option>Mañana</option>
+                                <option>Tarde</option>
+                                <option>Noche</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="edad">Edad</label>
+                    <input type="number" formControlName="edad" id="edad" class="form-control">
+                    @if(this.formularioContacto.get('edad')?.touched &&
+                    this.formularioContacto.get('edad')?.errors?.['min']) {
+                    <div class="alert alert-danger" role="alert">
+                        Tienes que ser mayor de 10 años
+                    </div>
+                    }
+                    @if(this.formularioContacto.get('edad')?.touched &&
+                    this.formularioContacto.get('edad')?.errors?.['max']) {
+                    <div class="alert alert-danger" role="alert">
+                        Tienes que ser menor de 85 años
+                    </div>
+                    }
+
+                    @if(verEdad(this.formularioContacto.get('edad'))<16) { <div formGroupName="DatosPadres">Datos padres
+                        o
+                        tutor:
+                        <div formGroupName="DatosPadres">
+                            <div class="form-group">
+                                <label for="DNIpadre">DNI</label>
+                                <input type="text" formControlName="DNIpadre" id="DNIpadre" class="form-control"
+                                    required>
+                                @if(this.formularioContacto.get('DNIpadre')?.touched &&
+                                this.formularioContacto.get('DNIpadre')?.errors?.['required']) {
+                                <div class="alert alert-danger" role="alert">
+                                    El DNI no puede quedar vacío
+                                </div>
+                                }
+                                @if(this.formularioContacto.get('DNIpadre')?.touched &&
+                                this.formularioContacto.get('DNIpadre')?.errors?.['formatoDNI']) {
+                                <div class="alert alert-danger" role="alert">
+                                    El formato del DNI debe contener 8 numeros y una letra en mayúscula
+                                </div>
+                                }
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nombrePadre">Nombre</label>
+                                <input type="text" formControlName="nombrePadre" id="nombrePadre" class="form-control">
+                                @if(this.formularioContacto.get('nombrePadre')?.touched &&
+                                this.formularioContacto.get('nombrePadre')?.errors?.['pattern']||this.formularioContacto.get('nombrePadre')?.errors?.['maxlength'])
+                                {
+                                <div class="alert alert-danger" role="alert">
+                                    Debe tener como máximo 20 caracteres y en mayúsculas
+                                </div>
+                                }
+                            </div>
+
+                            <div class="form-group">
+                                <label for="apellidosPadre">Apellidos</label>
+                                <input type="text" style="text-transform: uppercase" formControlName="apellidosPadre"
+                                    id="apellidosPadre" class="form-control" required>
+                                @if(this.formularioContacto.get('apellidosPadre')?.touched &&
+                                this.formularioContacto.get('apellidosPadre')?.errors?.['required']) {
+                                <div class="alert alert-danger" role="alert">
+                                    El apellido no puede quedar vacío
+                                </div>
+                                }
+                                @if(this.formularioContacto.get('apellidosPadre')?.touched &&
+                                this.formularioContacto.get('apellidosPadre')?.errors?.['maxlength']) {
+                                <div class="alert alert-danger" role="alert">
+                                    Debe tener como máximo 50 caracteres
+                                </div>
+                                }
+                            </div>
+
+                        </div>
+
+                </div>
+                }
+        </div>
+        <br>
+        <button type="submit" [disabled]="formularioContacto.invalid"
+            class="btn btn-primary form-control">Registrarse</button>
+        </form>
+    </div>
+</section>
