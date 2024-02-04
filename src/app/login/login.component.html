@@ -1,18 +1,16 @@
 <section>
   <br>
   <div class="container">
-    <h1 class=" text-center">LOGIN</h1>
-    <br>
-    <form (ngSubmit)="submit()" class="text-center border border-dark rounded-5 p-5">
+    <form (ngSubmit)="submit()" class="text-center border border-dark rounded-5 p-5 fondo-log">
       
-      <!-- Nombre -->
-      <input type="text" [(ngModel)]="nombre" class="form-control mb-4" placeholder="Name">
+    <h3 class=" text-center">LOGIN</h3>
+    <br>
 
       <!-- Email -->
-      <input type="email" [(ngModel)]="email" class="form-control mb-4" placeholder="E-mail">
+      <input type="email" [(ngModel)]="email" name="email" class="form-control mb-4" placeholder="E-mail">
 
       <!-- Contraseña -->
-      <input type="password" [(ngModel)]="password" class="form-control mb-4" placeholder="Password">
+      <input type="password" [(ngModel)]="pass" name="pass" class="form-control mb-4" placeholder="Password">
 
       <!-- Recordar Usuario y Olvidar Contraseña -->
       <div class="d-flex justify-content-around">
@@ -32,7 +30,11 @@
       <a type="button" class="light-blue-text mx-2"><i class="bi bi-twitter"></i></a>
       <a type="button" class="light-blue-text mx-2"><i class="bi bi-linkedin"></i></a>
       <a type="button" class="light-blue-text mx-2"><i class="bi bi-github"></i></a>
-
     </form>
+  </div>
+  <br>
+
+  <div *ngIf="loading">
+    <app-loading></app-loading>
   </div>
 </section>

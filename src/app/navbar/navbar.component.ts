@@ -31,4 +31,10 @@ export class NavbarComponent {
     this.mostrarSidebar = !this.mostrarSidebar;
     
   }
+  logOut() {
+    // Borrar el token de autenticación
+    localStorage.removeItem('token'); // O sessionStorage, dependiendo de dónde guardes el token
+    // Redirigir al usuario al inicio
+    this.router.navigate(['/inicio']);
+}
 }

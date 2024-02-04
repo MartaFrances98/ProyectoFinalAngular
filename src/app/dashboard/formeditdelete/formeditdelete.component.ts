@@ -2,13 +2,16 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
+import { FormreunionService } from '../../servicios/formreunion/formreunion.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-formeditdelete',
   standalone: true,
   imports: [RouterOutlet, CommonModule, ReactiveFormsModule],
   templateUrl: './formeditdelete.component.html',
-  styleUrl: './formeditdelete.component.css'
+  styleUrl: './formeditdelete.component.css',
+  providers: [FormreunionService],
 })
 export class FormeditdeleteComponent {
   citaForm = new FormGroup({
@@ -18,15 +21,33 @@ export class FormeditdeleteComponent {
     Descripccion: new FormControl(''),
     Fecha: new FormControl(''),
     Hora: new FormControl(''),
-
+    Duracion: new FormControl(''),
+    Reunion: new FormControl('true'),
+    OpcionesSelect: new FormControl('')
   });
+  Reunion= new FormControl('');
 
-  constructor() { }
+  constructor(private router: Router, private authService: FormreunionService) { }
 
   onSubmit() {
-    // Aquí procesarías los datos del formulario, por ejemplo, enviándolos a un servidor
-    console.log(this.citaForm.value);
-    alert('¡Registro exitoso!');
+      if (this.citaForm.valid) {
+        console.log(this.citaForm.value);
+        this.authService.createReunion(this.citaForm.value).subscribe({
+          next: (response) => {
+            console.log('Reunión creada', response);
+            alert('¡Registro exitoso!');
+            this.citaForm.reset(); // Resetear el formulario tras el éxito
+          },
+          error: (error) => {
+            console.error('Error al crear la reunión', error);
+            alert('Hubo un error al crear la reunión. Por favor, inténtalo de nuevo.');
+          }
+        });
+      } else {
+        // Manejar el caso de formulario no válido
+        alert('Por favor, completa el formulario correctamente.');
+      }
+    }
 
   }
-}
+

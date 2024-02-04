@@ -1,28 +1,8 @@
-<div class="container">
+<br>
+<div class="container fondo-log">
     <full-calendar [options]="calendarOptions"></full-calendar>
+    <br>
 </div>
-
-<!-- <div class="modal fade" id="citaModal" tabindex="-1" role="dialog" aria-labelledby="citaModalLabel" aria-hidden="true" *ngIf="modalAbierto">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="citaModalLabel">Nueva Cita</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cerrarModal()">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <div class="row">
-                        <app-forminsert></app-forminsert>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-<!-- Botón para abrir el modal -->
-
 
 <!-- Modal -->
 <div class="modal fade" [class.show]="modalAbierto" id="citaModal" tabindex="-1" role="dialog" aria-labelledby="citaModalLabel" aria-hidden="true" [style.display]="modalAbierto ? 'block' : 'none'">

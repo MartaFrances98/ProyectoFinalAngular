@@ -13,9 +13,10 @@ export class ValidacionesPropias {
     static mas18(control: AbstractControl): ValidationErrors| null {
         let id = parseInt(control.value);
        
-        if (id>17 && id<86)
-            return null;
-        else
-            return { mas18: true }
-    }
+        if (id > 15 && id < 86)
+        return null;
+    else
+        return { mas18: true }
+}
+
 }

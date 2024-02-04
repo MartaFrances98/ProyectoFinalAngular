@@ -2,24 +2,19 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ValidacionesPropias } from '../validaciones-propias';
+import { ValidacionesPropias } from '../../validaciones-propias';
 import { Router } from '@angular/router';
-import { SignupService } from '../servicios/singup/signup.service';
+import { SignupService } from '../../servicios/singup/signup.service';
 import { HttpClientModule } from '@angular/common/http';
 
-
-
 @Component({
-  selector: 'app-signup',
+  selector: 'app-modifusuario',
   standalone: true,
-  imports: [CommonModule,RouterOutlet,ReactiveFormsModule, HttpClientModule],
-  templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css',
-  providers: [SignupService],
+  imports: [CommonModule,ReactiveFormsModule,RouterOutlet,HttpClientModule],
+  templateUrl: './modifusuario.component.html',
+  styleUrl: './modifusuario.component.css'
 })
-
-export class SignupComponent  {
-
+export class ModifusuarioComponent {
   constructor(private ruta: Router, private authService: SignupService) { }
   resultado = '';
 
@@ -61,13 +56,13 @@ export class SignupComponent  {
       const userData = this.formularioContacto.value; 
       this.authService.registerUser(userData).subscribe({
         next: (response) => {
-          console.log('Registro exitoso', response);
-          alert('¡Registro exitoso!');
-          this.ruta.navigate(['/login']);
+          console.log('Modificacion exitosa', response);
+          alert('¡Modificacion exitosa!');
+          // this.ruta.navigate(['/login']);
         },
         error: (error) => {
-          console.error('Error al registrar el usuario', error);
-          this.resultado = 'Error al registrar el usuario. Por favor, inténtelo de nuevo.';
+          console.error('Error al modificar el usuario', error);
+          this.resultado = 'Error al modificar el usuario. Por favor, inténtelo de nuevo.';
         }
       });
     } else {

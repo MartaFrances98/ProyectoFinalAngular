@@ -3,10 +3,7 @@
       <label for="nombre">Nombre</label>
       <input type="text" class="form-control" id="nombre" formControlName="Nombre">
     </div>
-    <div class="form-group">
-      <label for="idUsuario">ID Usuario</label>
-      <input type="text" class="form-control" id="idUsuario" formControlName="IdUsuario">
-    </div>
+    
     <div class="form-group">
       <label for="estado">Estado</label>
       <select class="form-control" id="estado" formControlName="Estado">
@@ -27,10 +24,35 @@
       <label for="hora">Hora</label>
       <input type="time" class="form-control" id="hora" formControlName="Hora">
     </div>
-    <div class="form-check">
-      <input type="checkbox" class="form-check-input" id="citaReunion">
-      <label class="form-check-label" for="citaReunion">Es una reunión</label>
+    <div class="form-group">
+      <label for="duracion">Duración</label>
+      <select class="form-control" id="duracion" formControlName="Duracion">
+        <option value="15min">15 minutos</option>
+        <option value="30min">30 minutos</option>
+        <option value="1hora">1 hora</option>
+        <option value="1hora30min">1 hora 30 minutos</option>
+        <option value="2horas">2 horas</option>
+      </select>
     </div>
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="citaReunion" formControlName="Reunion">
+      <label class="form-check-label" for="citaReunion" >Es una reunión</label>
+    </div>
+    
+    <div class="form-group">
+      @if(this.citaForm.get('Reunion')?.value){
+        <label for="opcionesSelect">Elige las opciones</label>
+        <select class="form-select" multiple aria-label="Multiple select example" formControlName="OpcionesSelect">
+          <option selected>Open this select menu</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      }
+      </div>
+      
+      
+    
     <button type="submit" class="btn btn-primary">Guardar Cita</button>
   </form>
   

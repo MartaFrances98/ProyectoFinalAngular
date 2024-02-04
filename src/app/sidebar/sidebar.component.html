@@ -1,0 +1,137 @@
+<!-- @if (isSidebarVisible){
+  <aside class="col-md-3" class="sidebar">
+    <div class="list-group">
+      
+      <a href="#" class="list-group-item list-group-item-action active">
+        Pendientes
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">
+        En Progreso
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">
+        Completadas
+      </a>
+  
+     
+      <div class="filters mt-4">
+        <h5>Filtros</h5>
+        <div class="form-group">
+          <label for="filterPriority">Prioridad</label>
+          <select class="form-control" id="filterPriority">
+            <option>Alta</option>
+            <option>Media</option>
+            <option>Baja</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="filterDate">Fecha de Vencimiento</label>
+          <input type="date" class="form-control" id="filterDate">
+        </div>
+      </div>
+    </div>
+  </aside>
+} -->
+
+<div class="col-md-3">
+  <br>
+  <button class="btn btn-primary mb-3" (click)="toggleSidebar()">Calendario</button>
+  <div class="flex-shrink-0 p-3" [class.d-none]="!isSidebarVisible" style="width: 280px;">
+    <ul class="list-unstyled ps-0">
+      <li class="mb-1">
+        <h5 class="mt-3 mb-2">Empleados</h5>
+        <button class="btn btn-toggle align-items-center rounded border-0 mb-2" (click)="toggleCollapse('home')" [attr.aria-expanded]="!isHomeCollapsed">
+          <h5 class="d-inline">Home</h5>
+        </button>
+        <div [class.collapse]="isHomeCollapsed" [class.show]="!isHomeCollapsed">
+          <div class="list-group mb-3">
+            <a href="#" class="list-group-item list-group-item-action active">Inicio</a>
+            <a href="#" class="list-group-item list-group-item-action">asdfghj</a>
+            <a href="#" class="list-group-item list-group-item-action">Log out</a>
+          </div>
+        </div>
+        
+        <button class="btn btn-toggle align-items-center rounded border-0 mb-2" (click)="toggleCollapse('filtros')" [attr.aria-expanded]="!isFiltrosCollapsed">
+          <h5 class="d-inline">Filtros</h5>
+        </button>
+        <!-- Contenido colapsable para Filtros -->
+        <div [class.collapse]="isFiltrosCollapsed" [class.show]="!isFiltrosCollapsed">
+          <div class="form-group mb-3">
+            <label for="filterDate">Fecha de Vencimiento</label>
+            <input type="date" class="form-control" id="filterDate">
+          </div>
+        </div>
+
+        <button class="btn btn-toggle align-items-center rounded border-0 mb-2" (click)="toggleCollapse('tipo')" [attr.aria-expanded]="!isTipoCollapsed">
+          <h5 class="d-inline">Estado</h5>
+        </button>
+        <div [class.collapse]="isTipoCollapsed" [class.show]="!isTipoCollapsed">
+          <div class="list-group mb-3">
+            <a href="#" class="list-group-item list-group-item-action active">Pendientes</a>
+            <a href="#" class="list-group-item list-group-item-action">En Progreso</a>
+            <a href="#" class="list-group-item list-group-item-action">Completadas</a>
+          </div>
+        </div>
+
+        <h5 class="mt-3 mb-2">Administrador</h5>
+        <button class="btn btn-toggle align-items-center rounded border-0 mb-2" (click)="toggleCollapse('cosas')" [attr.aria-expanded]="!isCosasCollapsed">
+          <h5 class="d-inline">Gestion de Usuarios</h5>
+        </button>
+        <div [class.collapse]="isCosasCollapsed" [class.show]="!isCosasCollapsed">
+          <div class="list-group">
+            <a routerLink="/insertusuario" class="list-group-item list-group-item-action">Crear Usuario</a>
+            <a routerLink="/modifiusuario" class="list-group-item list-group-item-action">Modificar Usuario</a>
+            <a routerLink="/elimiusuario" class="list-group-item list-group-item-action">Eliminar Usuario</a>
+          </div>          
+        </div>
+      </li>
+    </ul>
+  </div>
+  <router-outlet></router-outlet>
+</div>
+
+
+<!-- <div class="col-md-3">
+  <button class="btn btn-primary" (click)="toggleSidebar()">Collapsible</button>
+
+  <div class="flex-shrink-0 p-3" style="width: 280px;" [ngClass]="{'d-none': !isSidebarVisible}">
+    <ul class="list-unstyled ps-0">
+      <li class="mb-1">
+        <h5 class="mb-1">Home</h5>
+        <button class="btn btn-toggle align-items-center rounded border-0" (click)="toggleCollapse('home')" [attr.aria-expanded]="!isHomeCollapsed"></button>
+        <div [ngClass]="{'collapse': isHomeCollapsed, 'show': !isHomeCollapsed}">
+          <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action active">Inicio</a>
+            <a href="#" class="list-group-item list-group-item-action">asdfghj</a>
+            <a href="#" class="list-group-item list-group-item-action">Log out</a>
+          </div>
+        </div>
+
+        <h5 class="mb-1">Filtros</h5>
+        <div class="form-group">
+          <label for="filterDate">Fecha de Vencimiento</label>
+          <input type="date" class="form-control" id="filterDate">
+        </div>
+
+        <h5 class="mb-1">Estado</h5>
+        <button class="btn btn-toggle align-items-center rounded border-0" (click)="toggleCollapse('tipo')" [attr.aria-expanded]="!isTipoCollapsed"></button>
+        <div [ngClass]="{'collapse': isTipoCollapsed, 'show': !isTipoCollapsed}">
+          <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action active">Pendientes</a>
+            <a href="#" class="list-group-item list-group-item-action">En Progreso</a>
+            <a href="#" class="list-group-item list-group-item-action">Completadas</a>
+          </div>
+        </div>
+
+        <h5 class="mb-1">Administrador</h5>
+        <button class="btn btn-toggle align-items-center rounded border-0" (click)="toggleCollapse('cosas')" [attr.aria-expanded]="!isCosasCollapsed"></button>
+        <div [ngClass]="{'collapse': isCosasCollapsed, 'show': !isCosasCollapsed}">
+          <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action active">Crear Usuario</a>
+            <a href="#" class="list-group-item list-group-item-action">Modificar Usuario</a>
+            <a href="#" class="list-group-item list-group-item-action">Eliminar Usuario</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div> -->

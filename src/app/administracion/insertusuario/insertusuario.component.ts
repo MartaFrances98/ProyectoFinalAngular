@@ -2,23 +2,22 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ValidacionesPropias } from '../validaciones-propias';
+import { ValidacionesPropias } from '../../validaciones-propias';
 import { Router } from '@angular/router';
-import { SignupService } from '../servicios/singup/signup.service';
+import { SignupService } from '../../servicios/singup/signup.service';
 import { HttpClientModule } from '@angular/common/http';
 
-
-
 @Component({
-  selector: 'app-signup',
+  selector: 'app-insertusuario',
   standalone: true,
-  imports: [CommonModule,RouterOutlet,ReactiveFormsModule, HttpClientModule],
-  templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css',
+  imports: [CommonModule,ReactiveFormsModule,RouterOutlet,HttpClientModule],
+  templateUrl: './insertusuario.component.html',
+  styleUrl: './insertusuario.component.css',
   providers: [SignupService],
 })
+export class InsertusuarioComponent {
 
-export class SignupComponent  {
+
 
   constructor(private ruta: Router, private authService: SignupService) { }
   resultado = '';

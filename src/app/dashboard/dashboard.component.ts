@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { SidebarComponent } from '../navbar/sidebar/sidebar.component'; 
-import { SidebarserviceService } from '../navbar/sidebar/sidebarservice.service';
+import { SidebarComponent } from '../sidebar/sidebar.component'; 
 import { CalendarioComponent } from './calendario/calendario.component';
 import { ForminsertComponent } from './forminsert/forminsert.component';
 import { FormeditdeleteComponent } from './formeditdelete/formeditdelete.component';
@@ -19,6 +18,7 @@ import { FormeditdeleteComponent } from './formeditdelete/formeditdelete.compone
   providedIn: 'root'
 })
 export class DashboardComponent {
+ 
   
   private isVisible = new BehaviorSubject<boolean>(false);
 
@@ -27,7 +27,8 @@ export class DashboardComponent {
 
   toggleVisibility(): void {
     this.isVisible.next(!this.isVisible.value);
+
   }
-
-
 }
+
+

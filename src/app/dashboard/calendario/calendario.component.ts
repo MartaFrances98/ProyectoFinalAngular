@@ -1,29 +1,41 @@
-import { Component, importProvidersFrom } from '@angular/core';
+import { Component, importProvidersFrom, OnInit } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/core'; // useful for typechecking
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import bootstrapPlugin from '@fullcalendar/bootstrap';
 import { ForminsertComponent } from '../forminsert/forminsert.component';
 import interactionPlugin from '@fullcalendar/interaction';
+import { FormreunionService } from '../../servicios/formreunion/formreunion.service';
+import { Router } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import festivos from '../../../assets/festivos.json';
 
-import $ from 'jquery';
 
 
 
 @Component({
   selector: 'app-calendario',
   standalone: true,
-  imports: [FullCalendarModule, ForminsertComponent],
+  imports: [FullCalendarModule, ForminsertComponent, HttpClientModule],
   templateUrl: './calendario.component.html',
-  styleUrl: './calendario.component.css'
+  styleUrl: './calendario.component.css',
+  providers: [FormreunionService],
+
 
 })
 
-// interface ExtendedCalendarOptions extends CalendarOptions {
-//   dateClick?: (arg: any) => void;
-// }
 
 export class CalendarioComponent {
+  // calendarOptions!: CalendarOptions;
+  calendarOptions: CalendarOptions = {
+    initialView: 'dayGridMonth', // Asegúrate de que este valor es correcto
+    plugins: [dayGridPlugin, bootstrapPlugin, interactionPlugin],
+    dateClick: this.handleDateClick.bind(this),
+    eventClick: this.handleEventClick.bind(this),
+    firstDay: 1, // Configuración para que la semana comience en lunes
+    timeZone: 'Europe/Madrid',
+  };
+  constructor(private router: Router, private authService: FormreunionService) { }
   modalAbierto: boolean = false;
 
   abrirModal() {
@@ -33,23 +45,62 @@ export class CalendarioComponent {
   cerrarModal() {
     this.modalAbierto = false;
   }
+  //
+  ngOnInit() {
+    this.cargarEventos();
+  }
 
-  calendarOptions: CalendarOptions = {
-   initialView: 'dayGridMonth',
-   plugins: [dayGridPlugin, bootstrapPlugin, interactionPlugin],
-   dateClick: (arg: any) => {
-     alert('Funciono'+ arg);
-     this.modalAbierto=true;
-   } , // Asegúrate de enlazar correctamente el contexto
- };
 
-  
+  cargarEventos() {
+    this.authService.getReuniones().subscribe({
+      next: (respuesta) => {
+        console.log(respuesta);
+        if (respuesta.success && Array.isArray(respuesta.reuniones)) {
+          const eventosDeReuniones = respuesta.reuniones.map((evento: any) => ({
+            title: evento.Nombre,
+            start: evento.Fecha.split('T')[0], // Usa 'start' en lugar de 'date'
+            color: 'red'
+          }));
+          // Después de cargar eventos de reuniones, añade festivos
+          this.agregarFestivos(eventosDeReuniones);
+        } else {
+          console.error('La respuesta del servicio no tiene el formato esperado.');
+          // Si la respuesta no es la esperada, aún así añade los festivos
+          this.agregarFestivos([]);
+        }
+      },
+      error: (error) => {
+        console.error('Error al cargar los eventos de reuniones', error);
+        // En caso de error, aún así intenta añadir los festivos
+        this.agregarFestivos([]);
+      }
+    });
+  }
 
- // handleDateClick(arg: any) {
-    //const modal = document.getElementById('citaModal');
-    // Aquí usas métodos nativos para mostrar el modal
-    // Por ejemplo, puedes agregar una clase de Bootstrap para mostrarlo
-   // modal.classList.add('show');
-    // Aquí puedes establecer la fecha seleccionada en el formulario
-  //}
+  agregarFestivos(eventosDeReuniones: any[] = []) {
+    // Aquí asumimos que 'festivos' es un array importado de tu JSON
+    const eventosDeFestivos = festivos.map((festivo: any) => ({
+      title: festivo.name,
+      date: festivo.date,
+      color: 'blue' // Puedes personalizar el color
+    }));
+
+    // Combina eventos de reuniones con festivos y actualiza las opciones del calendario
+    this.calendarOptions = {
+      ...this.calendarOptions, // Mantén las opciones existentes
+      events: [...eventosDeReuniones, ...eventosDeFestivos]
+    };
+  }
+
+  handleDateClick(arg: any) {
+    // Manejo del clic en una fecha
+    this.modalAbierto = true;
+    // Realizar acciones adicionales si es necesario
+  }
+  handleEventClick(clickInfo: any) {
+    // Aquí establecerías los valores del formulario con la información del evento si es necesario.
+    // clickInfo.event te dará acceso al evento clicado
+    this.abrirModal();
+
+  }
 }
