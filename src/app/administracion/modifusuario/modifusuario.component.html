@@ -1,10 +1,14 @@
 <section>
     <br>
     <div class="container text-center mt-5">
-        <h3 class="text-center">CREAR NUEVO USUARIO</h3>
+        <div class="d-flex justify-content-start">
+            <button class="btn btn-primary" (click)="volverAlDashboard()">Volver al Dashboard</button>
+        </div>
         <br>
         <form [formGroup]="formularioContacto" (ngSubmit)="submit($event)"
             class="text-center border border-dark rounded-5 p-5" style="max-width: auto; margin: auto;">
+            <h3 class="text-center">MODIFICAR USUARIO</h3>
+            <br>
             <div class="form-group">
                 <label for="DNI">DNI</label>
                 <input type="text" formControlName="DNI" id="DNI" class="form-control" required>
@@ -84,24 +88,23 @@
                         }
                     </div>
                 </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="password">Contraseña</label>
-                            <input type="password" formControlName="password" id="password" class="form-control"
-                                required>
-                            @if (this.formularioContacto.get("password")?.touched &&
-                            this.formularioContacto.get("password")?.errors?.['required']) {
-                            <div class="alert alert-danger" role="alert">
-                                La contraseña es obligatoria.
-                            </div>
-                            }
-                            @if (this.formularioContacto.get("password")?.touched &&
-                            this.formularioContacto.get("password")?.errors?.['minlength']) {
-                            <div class="alert alert-danger" role="alert">
-                                La contraseña debe tener al menos 8 caracteres.
-                            </div>
-                            }
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" formControlName="password" id="password" class="form-control" required>
+                        @if (this.formularioContacto.get("password")?.touched &&
+                        this.formularioContacto.get("password")?.errors?.['required']) {
+                        <div class="alert alert-danger" role="alert">
+                            La contraseña es obligatoria.
                         </div>
+                        }
+                        @if (this.formularioContacto.get("password")?.touched &&
+                        this.formularioContacto.get("password")?.errors?.['minlength']) {
+                        <div class="alert alert-danger" role="alert">
+                            La contraseña debe tener al menos 8 caracteres.
+                        </div>
+                        }
+                    </div>
                 </div>
             </div>
 
@@ -234,6 +237,6 @@
                 class="btn btn-primary form-control">Registrarse</button>
 
         </form>
+        <br>
     </div>
 </section>
-

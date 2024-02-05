@@ -4,7 +4,7 @@
     <br>
 </div>
 
-<!-- Modal -->
+<!-- Modal Insertar Cita -->
 <div class="modal fade" [class.show]="modalAbierto" id="citaModal" tabindex="-1" role="dialog" aria-labelledby="citaModalLabel" aria-hidden="true" [style.display]="modalAbierto ? 'block' : 'none'">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -17,7 +17,28 @@
             <div class="modal-body">
                 <div class="container">
                     <div class="row">
-                        <app-forminsert></app-forminsert>
+                        <app-forminsert [fechaSeleccionada]="fechaSeleccionada"></app-forminsert>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Modificar Eliminar -->
+<div class="modal fade" [class.show]="modalAbiertoEditar" id="EditarModal" tabindex="-1" role="dialog" aria-labelledby="EditarModalLabel" aria-hidden="true" [style.display]="modalAbiertoEditar ? 'block' : 'none'">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="EditarModalLabel">Editar Cita</h5>
+                <button type="button" class="close" (click)="cerrarModalEditar()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <app-formeditdelete [eventoID]="eventoID"></app-formeditdelete>
                     </div>
                 </div>
             </div>

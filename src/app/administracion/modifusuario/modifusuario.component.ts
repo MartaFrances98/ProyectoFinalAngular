@@ -12,7 +12,9 @@ import { HttpClientModule } from '@angular/common/http';
   standalone: true,
   imports: [CommonModule,ReactiveFormsModule,RouterOutlet,HttpClientModule],
   templateUrl: './modifusuario.component.html',
-  styleUrl: './modifusuario.component.css'
+  styleUrl: './modifusuario.component.css',
+  providers: [SignupService],
+
 })
 export class ModifusuarioComponent {
   constructor(private ruta: Router, private authService: SignupService) { }
@@ -69,5 +71,8 @@ export class ModifusuarioComponent {
       console.error('El formulario no es válido');
       this.resultado = 'Por favor, completa el formulario correctamente.';
     }
+  }
+  volverAlDashboard() {
+    this.ruta.navigate(['/dashboard']);
   }
 }

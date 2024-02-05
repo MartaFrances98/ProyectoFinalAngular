@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
-import { FormreunionService } from '../../servicios/formreunion/formreunion.service';
+import { FormreunionService } from '../../../servicios/formreunion/formreunion.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
   providers: [FormreunionService],
 })
 export class FormeditdeleteComponent {
+  @Input() eventoID: string = '';
   citaForm = new FormGroup({
     Nombre: new FormControl(''),
     IdUsuario: new FormControl(''),

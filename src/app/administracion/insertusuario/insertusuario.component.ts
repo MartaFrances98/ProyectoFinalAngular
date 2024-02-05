@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { SignupService } from '../../servicios/singup/signup.service';
 import { HttpClientModule } from '@angular/common/http';
 
+
 @Component({
   selector: 'app-insertusuario',
   standalone: true,
@@ -16,8 +17,6 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [SignupService],
 })
 export class InsertusuarioComponent {
-
-
 
   constructor(private ruta: Router, private authService: SignupService) { }
   resultado = '';
@@ -73,5 +72,9 @@ export class InsertusuarioComponent {
       console.error('El formulario no es válido');
       this.resultado = 'Por favor, completa el formulario correctamente.';
     }
+  }
+
+  volverAlDashboard() {
+    this.ruta.navigate(['/dashboard']);
   }
 }

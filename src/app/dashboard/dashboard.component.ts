@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { SidebarComponent } from '../sidebar/sidebar.component'; 
 import { CalendarioComponent } from './calendario/calendario.component';
-import { ForminsertComponent } from './forminsert/forminsert.component';
-import { FormeditdeleteComponent } from './formeditdelete/formeditdelete.component';
+import { ForminsertComponent } from './calendario/forminsert/forminsert.component';
+import { FormeditdeleteComponent } from './calendario/formeditdelete/formeditdelete.component';
 
 @Component({
   selector: 'app-dashboard',

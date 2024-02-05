@@ -13,6 +13,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
+//isSidebarExpanded = true;
   isSidebarVisible = true;
   isHomeCollapsed = true;
   isTipoCollapsed = true;
@@ -33,8 +34,9 @@ export class SidebarComponent {
   }
 
   toggleSidebar() {
-    this.isSidebarVisible = !this.isSidebarVisible; // Cambia la visibilidad
-  }
+    this.isSidebarVisible = !this.isSidebarVisible;
+    // this.isSidebarExpanded = !this.isSidebarExpanded;
+  } // Cambia la visibilidad
 
 }
 

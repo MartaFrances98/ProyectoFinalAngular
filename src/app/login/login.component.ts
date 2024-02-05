@@ -37,7 +37,7 @@ export class LoginComponent {
       data => {
         this.loading = false;
         // Guarda el token y navega al dashboard
-        this.saveToken(data.token);
+        sessionStorage.setItem('token', data.token);
         this.router.navigate(['/dashboard']);
       },
       error => {

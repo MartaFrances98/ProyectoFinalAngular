@@ -32,7 +32,7 @@ export const routes: Routes = [
     component: InsertusuarioComponent
   },
   {
-    path: 'modifiusuario',
+    path: 'modifusuario',
     component: ModifusuarioComponent
   },
   {

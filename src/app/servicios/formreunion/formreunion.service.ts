@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,11 +12,30 @@ export class FormreunionService {
   constructor(private http: HttpClient) { }
 
   getReuniones(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/reuniones`);
+    const token = sessionStorage.getItem('token'); // o localStorage según dónde guardes el token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get(`${this.apiUrl}/reuniones`, { headers });
   }
 
   createReunion(reunionData: any): Observable<any> {
-    console.log(reunionData);
-    return this.http.post(`${this.apiUrl}/reuniones`, reunionData);
+    const token = sessionStorage.getItem('token'); // o localStorage según dónde guardes el token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.post(`${this.apiUrl}/reuniones`, reunionData, { headers });
   }
+
+  getReunion(id: any):Observable<any>{
+    const token = sessionStorage.getItem('token'); // o localStorage según dónde guardes el token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get(`${this.apiUrl}/reunion/${id}`, { headers });
+  }
+
 }

@@ -3,12 +3,13 @@ import { CalendarOptions } from '@fullcalendar/core'; // useful for typechecking
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import bootstrapPlugin from '@fullcalendar/bootstrap';
-import { ForminsertComponent } from '../forminsert/forminsert.component';
+import { ForminsertComponent } from './forminsert/forminsert.component';
 import interactionPlugin from '@fullcalendar/interaction';
 import { FormreunionService } from '../../servicios/formreunion/formreunion.service';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import festivos from '../../../assets/festivos.json';
+import { FormeditdeleteComponent } from './formeditdelete/formeditdelete.component';
 
 
 
@@ -16,12 +17,10 @@ import festivos from '../../../assets/festivos.json';
 @Component({
   selector: 'app-calendario',
   standalone: true,
-  imports: [FullCalendarModule, ForminsertComponent, HttpClientModule],
+  imports: [FullCalendarModule, ForminsertComponent, HttpClientModule, FormeditdeleteComponent],
   templateUrl: './calendario.component.html',
   styleUrl: './calendario.component.css',
   providers: [FormreunionService],
-
-
 })
 
 
@@ -37,6 +36,9 @@ export class CalendarioComponent {
   };
   constructor(private router: Router, private authService: FormreunionService) { }
   modalAbierto: boolean = false;
+  modalAbiertoEditar: boolean = false;
+  fechaSeleccionada: string = '';
+  eventoID: string = '';
 
   abrirModal() {
     this.modalAbierto = true;
@@ -45,18 +47,28 @@ export class CalendarioComponent {
   cerrarModal() {
     this.modalAbierto = false;
   }
-  //
+
+  cerrarModalEditar() {
+    this.modalAbiertoEditar = false;
+  }
+  
   ngOnInit() {
     this.cargarEventos();
   }
 
 
   cargarEventos() {
+    if (sessionStorage.getItem('token')) {
+      // El token existe
+    } else {
+      // El token no existe
+    }
     this.authService.getReuniones().subscribe({
       next: (respuesta) => {
         console.log(respuesta);
         if (respuesta.success && Array.isArray(respuesta.reuniones)) {
           const eventosDeReuniones = respuesta.reuniones.map((evento: any) => ({
+            id: evento.idReunion,
             title: evento.Nombre,
             start: evento.Fecha.split('T')[0], // Usa 'start' en lugar de 'date'
             color: 'red'
@@ -93,14 +105,17 @@ export class CalendarioComponent {
   }
 
   handleDateClick(arg: any) {
-    // Manejo del clic en una fecha
+    this.fechaSeleccionada = arg.dateStr;
+    // alert('Fecha'+ this.fechaSeleccionada);
+    // Manejo del clic en una fecha2
     this.modalAbierto = true;
-    // Realizar acciones adicionales si es necesario
   }
   handleEventClick(clickInfo: any) {
     // Aquí establecerías los valores del formulario con la información del evento si es necesario.
     // clickInfo.event te dará acceso al evento clicado
-    this.abrirModal();
+    this.eventoID = clickInfo.event.id;
+    // alert('Evento: ' + clickInfo.event.id);
+    this.modalAbiertoEditar = true;
 
   }
 }

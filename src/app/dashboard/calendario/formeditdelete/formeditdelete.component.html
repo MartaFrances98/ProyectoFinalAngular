@@ -1,5 +1,8 @@
 
         <form [formGroup]="citaForm" (ngSubmit)="onSubmit()">
+
+          <!-- <input type="text" class="form-control" id="id" formControlName="id" [hidden]="true"> -->
+
           <div class="form-group">
             <label for="nombre">Nombre</label>
             <input type="text" class="form-control" id="nombre" formControlName="Nombre">
@@ -48,5 +51,10 @@
             <label class="form-check-label" for="citaReunion">Es una reunión</label>
           </div>
           <button type="submit" class="btn btn-primary">Editar cita</button>
+        </form>
+
+      <!-- DELETE -->
+        <form [formGroup]="citaForm" (ngSubmit)="onSubmit()">
+          <!-- <input type="text" class="form-control" id="id" formControlName="id" [hidden]="true"> -->
           <button type="submit" class="btn btn-primary">Eliminar cita</button>
         </form>
