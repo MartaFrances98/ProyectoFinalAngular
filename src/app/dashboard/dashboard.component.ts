@@ -5,11 +5,13 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
 import { CalendarioComponent } from './calendario/calendario.component';
 import { ForminsertComponent } from './calendario/forminsert/forminsert.component';
 import { FormeditdeleteComponent } from './calendario/formeditdelete/formeditdelete.component';
+import { LoadingComponent } from '../loading/loading.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [SidebarComponent, ForminsertComponent, FormeditdeleteComponent, CalendarioComponent],
+  imports: [SidebarComponent, ForminsertComponent, FormeditdeleteComponent, CalendarioComponent,LoadingComponent,CommonModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })

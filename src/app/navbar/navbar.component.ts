@@ -31,10 +31,10 @@ export class NavbarComponent {
     this.mostrarSidebar = !this.mostrarSidebar;
     
   }
-  logOut() {
-    // Borrar el token de autenticación
-    sessionStorage.removeItem('token');
-    // Redirigir al usuario al inicio
-    this.router.navigate(['/inicio']);
-}
+//   logOut() {
+//     // Borrar el token de autenticación
+//     sessionStorage.removeItem('token');
+//     // Redirigir al usuario al inicio
+//     this.router.navigate(['/inicio']);
+// }
 }

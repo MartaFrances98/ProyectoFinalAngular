@@ -37,7 +37,9 @@ export class LoginComponent {
       data => {
         this.loading = false;
         // Guarda el token y navega al dashboard
+        console.log(data)
         sessionStorage.setItem('token', data.token);
+        sessionStorage.setItem('Admin', data.Administrador);
         this.router.navigate(['/dashboard']);
       },
       error => {

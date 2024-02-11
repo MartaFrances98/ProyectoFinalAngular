@@ -16,7 +16,8 @@ export class LoginService {
     console.log ( username + ' '+pass)
     return this.http.post(this.loginUrl, {
       username,
-      pass
+      pass,
+      
     });
   }
 }

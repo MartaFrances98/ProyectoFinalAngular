@@ -75,6 +75,6 @@ export class InsertusuarioComponent {
   }
 
   volverAlDashboard() {
-    this.ruta.navigate(['/dashboard']);
+    this.ruta.navigate(['/administracionusuarios']);
   }
 }

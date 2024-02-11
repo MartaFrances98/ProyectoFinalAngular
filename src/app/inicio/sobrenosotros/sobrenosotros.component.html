@@ -1,0 +1,16 @@
+<div class="container center mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="border border-dark border-3 rounded px-5">
+                <app-contenido (cambiar)="actualizar($event)"></app-contenido>
+                <div class="container text-center mt-5">
+                    <p [hidden]="value !== 'Hora'">9H-19H</p>
+                </div>
+                <div class="container text-center mt-5">
+                    <p [hidden]="value !== 'Descripcion'">Somos los mejores en aprobar examenes de Toño</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

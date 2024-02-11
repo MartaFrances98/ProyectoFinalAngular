@@ -2,28 +2,37 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { ErrorComponent } from './error/error.component';
 import { InicioComponent } from './inicio/inicio.component';
-// import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { InsertusuarioComponent } from './administracion/insertusuario/insertusuario.component';
-import { ModifusuarioComponent } from './administracion/modifusuario/modifusuario.component';
-import { ElimiusuarioComponent } from './administracion/elimiusuario/elimiusuario.component';
-
+import { InsertusuarioComponent } from './administracionusuarios/insertusuario/insertusuario.component';
+import { ModifusuarioComponent } from './administracionusuarios/modifusuario/modifusuario.component';
+import { AdministracionusuariosComponent } from './administracionusuarios/administracionusuarios.component';
+import { MapaComponent } from './inicio/mapa/mapa.component';
+import { SobrenosotrosComponent } from './inicio/sobrenosotros/sobrenosotros.component';
 
 
 export const routes: Routes = [
   {
     path: '',
     component: InicioComponent
+  },  {
+    path: 'inicio',
+    component: InicioComponent,
+    children: [
+      {
+        path: 'mapa',
+        component: MapaComponent
+      },
+      {
+        path: 'sobre-nosotros',
+        component: SobrenosotrosComponent
+      }
+    ]
   },
   {
     path: 'login',
     component: LoginComponent
   },
-  // {
-  //   path: 'signup',
-  //   component: SignupComponent
-  // },
-   {
+  {
     path: 'dashboard',
     component: DashboardComponent
   },
@@ -36,8 +45,8 @@ export const routes: Routes = [
     component: ModifusuarioComponent
   },
   {
-    path: 'elimiusuario',
-    component: ElimiusuarioComponent
+    path: 'administracionusuarios',
+    component: AdministracionusuariosComponent
   },
   {
     path: 'error',

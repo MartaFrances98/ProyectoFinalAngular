@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,7 +20,20 @@ export class SidebarComponent {
   isTipoCollapsed = true;
   isCosasCollapsed = true;
   isFiltrosCollapsed =true;
+  admin: boolean = false;
 
+  ngOnInit(){
+    if(sessionStorage.getItem('Admin')=='Si'){
+      this.admin = true;
+    }else{
+      this.admin = false;
+    }
+  }
+
+  constructor( private router: Router) { 
+  }
+
+  
   // Métodos para cambiar el estado
   toggleCollapse(section: string) {
     if (section === 'home') {
@@ -37,6 +51,14 @@ export class SidebarComponent {
     this.isSidebarVisible = !this.isSidebarVisible;
     // this.isSidebarExpanded = !this.isSidebarExpanded;
   } // Cambia la visibilidad
+
+  logOut() {
+    // Borrar el token de autenticación
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('Admin');
+    // Redirigir al usuario al inicio
+    this.router.navigate(['/inicio']);
+}
 
 }
 

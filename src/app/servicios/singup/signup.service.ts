@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
@@ -12,7 +12,12 @@ export class SignupService {
   constructor(private http: HttpClient) { }
 
   registerUser(userData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, userData);
+    const token = sessionStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.post(`${this.apiUrl}/register`, userData, { headers });
   }
 }
 
